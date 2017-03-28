@@ -12,6 +12,14 @@ class Link
     private $id;
 
     /**
+     * Link author.
+     *
+     * @var \WebLinks\Domain\User
+     */
+    private $author;
+
+
+    /**
      * Link title.
      *
      * @var string
@@ -31,6 +39,15 @@ class Link
 
     public function setId($id) {
         $this->id = $id;
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author) {
+        $this->author = $author;
+        return $this;
     }
 
     public function getTitle() {
