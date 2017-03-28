@@ -12,6 +12,9 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
+$app->register(new Silex\Provider\AssetServiceProvider(), array(
+    'assets.version' => 'v1'
+));
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
@@ -28,10 +31,10 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 ));
 
 // Register services
-$app['dao.user'] = $app->share(function ($app) {
+$app['dao.user'] = function ($app) {
     $userDAO = new WebLinks\DAO\UserDAO($app['db']);
     return $userDAO;
-});
+};
 $app['dao.link'] = function ($app) {
     $linkDAO = new WebLinks\DAO\LinkDAO($app['db']);
     $linkDAO->setUserDAO($app['dao.user']);
