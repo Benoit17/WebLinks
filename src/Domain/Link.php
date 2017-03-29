@@ -12,11 +12,11 @@ class Link
     private $id;
 
     /**
-     * Link author.
+     * Link user.
      *
      * @var \WebLinks\Domain\User
      */
-    private $author;
+    private $user;
 
 
     /**
@@ -41,13 +41,12 @@ class Link
         $this->id = $id;
     }
 
-    public function getAuthor() {
-        return $this->author;
+    public function getUser() {
+        return $this->user;
     }
 
-    public function setAuthor(User $author) {
-        $this->author = $author;
-        return $this;
+    public function setUser(User $user) {
+        $this->user = $user;
     }
 
     public function getTitle() {

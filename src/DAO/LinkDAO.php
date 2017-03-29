@@ -25,12 +25,12 @@ class LinkDAO extends DAO
         $result = $this->getDb()->fetchAll($sql);
         
         // Convert query result to an array of domain objects
-        $links = array();
+        $entities = array();
         foreach ($result as $row) {
             $id = $row['link_id'];
-            $links[$id] = $this->buildDomainObject($row);
+            $entities[$id] = $this->buildDomainObject($row);
         }
-        return $links;
+        return $entities;
     }
 
     /**
@@ -59,14 +59,14 @@ class LinkDAO extends DAO
     protected function buildDomainObject($row) {
         $link = new Link();
         $link->setId($row['link_id']);
-        $link->setUrl($row['link_title']);
-        $link->setTitle($row['link_url']);
+        $link->setTitle($row['link_title']);
+        $link->setUrl($row['link_url']);
 
         if (array_key_exists('user_id', $row)) {
             // Find and set the associated author
-            $authorId = $row['user_id'];
-            $author = $this->userDAO->find($authorId);
-            $link->setAuthor($author);
+            $userId = $row['user_id'];
+            $user = $this->userDAO->find($userId);
+            $link->setUser($user);
         }
         
         return $link;
